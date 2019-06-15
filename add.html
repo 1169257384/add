@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Document</title>
+</head>
+<body>
+   <div id="app">
+      <input
+         ref='ss'
+         type="text"
+         placeholder="请输入.."
+         v-model="value"
+         @keyup.enter='add'
+      />
+      <button @click='add'>add</button><br/>
+
+      <ul>
+         <li
+            v-for='(li,index) in list'
+            :key='index'
+         >
+         {{li}}--<button @click='del(index)'>del</button>
+         </li>
+      </ul>
+   </div>
+   
+   <script src="../lib/vue.js"></script>
+   <script>
+      var vm = new Vue({
+         el:'#app',
+         data:{
+            value:'',
+            list:['吃饭','睡觉']
+         },
+         methods:{
+            add(){
+               if(this.value){
+                  this.list.push(this.value);
+                  this.value='';
+                  console.log(this.$refs);
+                  this.$refs.ss.focus();
+               }
+               
+            },
+            del(index){
+               this.list.splice(index,1);
+            }
+         }
+      })
+   </script>
+</body>
+</html>
